@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>owner-rev</title>
+  <meta charset="UTF-8">
+<!-- Below is the initialization snippet for my Firebase project. It will vary for each project -->
+
+<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAUOTEBUxZb7-Te2byx3yuDw5Nioiwgyds",
+  authDomain: "smart-attendance-system-31d5a.firebaseapp.com",
+  databaseURL: "https://smart-attendance-system-31d5a-default-rtdb.firebaseio.com",
+  projectId: "smart-attendance-system-31d5a",
+  storageBucket: "smart-attendance-system-31d5a.appspot.com",
+  messagingSenderId: "359585778621",
+  appId: "1:359585778621:web:795aa4b3c8b00ed3bf60d4",
+  measurementId: "G-0451HWZYTZ"
+  };
+  firebase.initializeApp(config);
+</script>
+<link href="style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous"/>
+<link href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="heading">
+        <h1 id="first">SMART ATTENDANCE SYSTEM</h1>
+    </div>
+  <div class="container">
+    <div class="card" style="border-radius: 1em; padding: 10px;">
+      <div class="card-header" id="chead">
+        <img src="writ-white.png" height="70px" width="70px" id="writcon">
+             <h2 id="att-sum">Attendance Summary</h2>
+      </div>
+      <div class="card-body">
+        <button type="button" class="downl" id="export">
+          <img src="real-down.png" height="30px" aria-hidden="true" width="30px">
+        </button>
+        <span><img src="search-white.png" height="27px" id="searcher"></span>
+          <div class="table-responsive">
+              <table class="table table-bordered display responsive nowrap" id="buttonTable" width="100%" cellspacing="0" data-order="[]">
+                  <thead class="tbl-header">
+                      <tr>
+                          <th id="thw">User ID</th>
+                          <th id="thw">Device Id</th>
+                          <th id="thw">Time</th>
+                          <th id="thw">Status</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+  <div class="card mt-4" id="below-cont">
+      <div class="card-header" id="lower-head">
+          <i class="fa fa-table mr-1" id="livecon"></i>
+         <h2 id="live">LIVE STATUS</h2> 
+      </div>
+      <div class="card-body users">
+        
+      </div>
+  </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+
+  <script>
+    $(function(){
+      $('.users').html('No data available');
+      document.getElementById("export").onclick = function() { exportCSV() }; 
+  
+      function exportCSV() {
+      //// export CSV
+        console.log("exportCSV");
+        $('#buttonTable').DataTable().button(0).trigger();
+      } 
+
+      var button_table = $('#buttonTable').DataTable({
+        "ordering": false,
+        "paging": false,
+        buttons: [
+        	{
+            extend: 'csv',
+            filename: 'file_name',
+           	extension: '.csv'
+        	}
+    		],
+        initComplete: function() {
+        
+        $('.buttons-csv').hide();
+      }
+    });
+
+    firebase.database().ref('/').on('value',function(snap){   
+      if(snap.val().users){
+        let obj= snap.val().users;
+        console.log(obj);
+        $('.users').html('');
+        if(Object.keys(obj).length>0){
+          Object.keys(obj).forEach(key=>{
+            $('.users').append(`
+            <div class="live">
+              <img src="./img/checkin.png" width="150px" style="border-radius:5px;">
+              <ul>
+                <li><h3 style="color:white; font-size:30px; text-align:center; position:relative; top:20px;">UID: ${key}</h3></li>
+                <li><img id="true${key}" width="50px" src="./img/tick.png" style="position:relative; left:75px; top:37px;"></li>
+                <li><img id="false${key}" width="50px" src="./img/cross.png" style="position:relative; left:75px; top:37px;"></li>
+              </ul>
+            </div>
+            `);
+            if(obj[key]==1){
+              $('#true'+key).show();
+              $('#false'+key).hide();
+            }else{
+              $('#true'+key).hide();
+              $('#false'+key).show();
+            }
+          })
+        }
+      }
+      if(snap.val().attendence){
+          button_table.clear().draw();
+
+          let arr= Object.values(snap.val().attendence);
+          console.log(arr);  
+          arr.forEach(function(elem,i){
+              //console.log(table.row);
+              var sta;
+              var cla;
+              if(elem.status){
+                    sta= "Check In";
+                    cla= "sucs";
+                  //console.log(elem.status);
+                 // $('state'+elem.time).html('<span class="badge badge-success">Check In</span>');
+              }else{
+                sta= "Check Out";
+                cla= "fail";
+               // $('state'+elem.time).html('<span class="badge badge-danger">Check Out</span>');
+              }
+              var row= `<tr>
+                  <td id="sd">${elem.uid}</td>
+                  <td id="sd">${elem.id}</td>
+                  <td id="sd">${elem.time}</td>
+                  <td class="${cla}" id="state">${sta}</td>                
+              </tr>`;
+              button_table.rows.add($(row)).draw();
+              
+              console.log('#state'+elem.time);
+          })
+        }
+    })
+
+});
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,361 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+#first{
+    text-align: center;
+    font-size: 60px;
+    letter-spacing: 2px;
+    background: inherit;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-weight: 400;
+    margin:40px;
+}
+@media only screen and (max-width: 600px) {
+    .heading h1{
+      font-size: 20px;
+  }
+}
+
+body{
+  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+  background: linear-gradient(to right, #25b7c4, #25c481);
+  font-family: 'Roboto', sans-serif;
+}
+.heading{
+  position: relative;
+}
+.heading i{
+  position: absolute;
+  left: 90%;
+  top: 14%;
+}
+ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.live{
+    border: 1px solid black;
+    width: 40%;
+    margin: 10px;
+    padding: 10px;
+    float: left;
+}
+.live img{
+    float: left;
+}
+.parkings{
+    border: 1px solid black;
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+}
+.bookContainer{
+    border: 1px solid black; 
+    width: 40%;
+    margin: 10px;
+    padding: 10px;
+    float: left;
+}
+
+.show{
+    display: block;
+}
+
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color:#C850C0;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px brown;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  #form{
+    position: relative;
+  }
+  #heading2{
+    position: absolute;
+    top: 50%;
+  }
+
+.modal-header, h4, .close {
+    background-color: #5cb85c;
+    color:white !important;
+    text-align: center;
+    font-size: 30px;
+}
+.modal-footer {
+    background-color: #f9f9f9;
+}
+@media (min-width:767px){
+  #contain{
+      padding-top: 20px;
+      width: 40%;
+  }
+}
+.page{
+  height:560px;
+  overflow-y: scroll;
+}
+.heading h1 {
+  color: #ffffff;
+  line-height: 60px;
+  font-weight: bold;
+  font-family: 'Aldrich';
+  font-size: 60px;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 0px;
+  padding-top:20px;
+  padding-bottom: 20px;
+}
+#buttonTable{
+  background: inherit;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 1em;
+}
+/*tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+tr:hover{
+  background-color:#DFDFDE;
+}*/
+td{
+  padding: 15px;
+  text-align: center;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 20px;
+  color: #fff;
+}
+#sd{
+  border-left: none;
+  border-right: none;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+/*
+.tbl-content{
+  height:300px;
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3); 
+}*/
+.container{
+  background: inherit;
+  color:#ffffff;
+}
+.table-responsive{
+  background: inherit;
+  
+}
+.card-header{
+  position:relative;
+  right:9px;
+  bottom:9px;
+ /* background: inherit;*/
+  background: rgba(255, 255, 255, 0.555);
+  backdrop-filter: blur(20px);
+  border: 1.5px outset aquamarine;
+  width:101.5%;
+  height:100px;
+  box-shadow: 2px 2px 0.7px gray;
+}
+#att-sum{
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  font-size: 40px;
+  font-weight: 500;
+  position:relative;
+ bottom:60px;
+  left:100px;
+}
+#chead{
+  padding:-5px;
+  border-radius: 8px;
+}
+.card{
+  background: inherit;
+}
+.card-body{
+  margin-top: -30px;
+}
+.card-body input{
+  margin-bottom: 20px;
+  margin-right: 50px;
+  border-radius: 1em;
+  background-color:inherit;
+  border:2px outset turquoise;
+  font-size: 20px;
+}
+.card-body input:focus{
+  background-color:inherit;
+  color: #fff;
+  font-size: 20px;
+  border:2px outset aquamarine;
+  box-shadow:3px 3px 3px aqua;
+}
+.card-body label{
+  color:#5cb85c;
+  font-size: 2px;
+  display: inline-block;
+}
+.tbl-header{
+   background-color: rgba(255, 255, 255, 0.20);
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  color: #fff;
+ }
+ #thw{
+  border:none;
+  padding-top: 20px;
+  padding-bottom:20px;
+  font-size: 25px;
+  font-weight: 400;
+ }
+ .sucs{
+   text-align: center;
+   vertical-align: middle;
+   background-color: lightseagreen;
+   font-weight: 400;
+ }
+ .fail{
+   background-color: lightcoral;
+   font-weight: 400;
+ }
+ .downl{
+   position: relative;
+   top:40px;
+   left:40px;
+   background:inherit;
+   border:2px outset aquamarine;
+   height:67px;
+   width:70px;
+   border-radius: 1em;
+ }
+ .downl:hover{
+  position: relative;
+  top:40px;
+  left:40px;
+  background:inherit;
+  border:3px outset aqua;
+  height:72px;
+  width:75px;
+  border-radius: 1em;
+  box-shadow:3px 3px 3px turquoise;
+}
+ #searcher{
+   position: relative;
+   left:880px;
+   top:55px;
+ }
+ #lower-head{
+  position:relative;
+  left:13px;
+  top:8px;
+ /* background: inherit;*/
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1.5px outset aquamarine;
+  width:97.5%;
+  height:100px;
+  box-shadow: 2px 2px 0.7px gray;
+  border-radius: 8px;
+  margin-bottom: 30px;
+ }
+ #live{
+   position: relative;
+   left:2em;
+   font-size: 38px;
+   bottom:33px;
+   font-weight: 350;
+ }
+ #livecon{
+   height: 50px;
+   font-size: 50px;
+   position:relative;
+   top:18px;
+ }
+#below-cont{
+  border-radius: 1em;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+ }
+ .live{
+  background-color: rgba(255, 255, 255, 0.20);
+  border-radius: 8px;
+  border:1px outset aquamarine;
+  box-shadow: 1px 1px 1px gray;
+  width:42%;
+ }
+ .live:hover{
+  background-color: rgba(255, 255, 255, 0.20);
+  border-radius: 8px;
+  border:2px outset aquamarine;
+  box-shadow: 1px 1px 5px aqua;
+  width:42%;
+ }
+/*
+<i class="fa fa-table mr-1"></i>      // icon for attendence summary
+*/
+/*
+<i class="fa fa-download" aria-hidden="true"></i>     //download btton icon
+*/
+/*
+background-color: rgba(255,255,255,0.3);
+*/
