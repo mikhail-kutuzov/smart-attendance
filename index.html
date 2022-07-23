@@ -4,20 +4,19 @@
 <head>
   <title>owner-rev</title>
   <meta charset="UTF-8">
-<!-- Below is the initialization snippet for my Firebase project. It will vary for each project -->
 
 <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
 <script>
   // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyAUOTEBUxZb7-Te2byx3yuDw5Nioiwgyds",
-  authDomain: "smart-attendance-system-31d5a.firebaseapp.com",
-  databaseURL: "https://smart-attendance-system-31d5a-default-rtdb.firebaseio.com",
-  projectId: "smart-attendance-system-31d5a",
-  storageBucket: "smart-attendance-system-31d5a.appspot.com",
-  messagingSenderId: "359585778621",
-  appId: "1:359585778621:web:795aa4b3c8b00ed3bf60d4",
-  measurementId: "G-0451HWZYTZ"
+  apiKey: "AIzaSyBaGx-1aRswoQhNFHGc4-AJSA9JlbnsUVc",
+  authDomain: "ultimate-trial-611fc.firebaseapp.com",
+  databaseURL: "https://ultimate-trial-611fc.firebaseio.com",
+  projectId: "ultimate-trial-611fc",
+  storageBucket: "ultimate-trial-611fc.appspot.com",
+  messagingSenderId: "244370051110",
+  appId: "1:244370051110:web:b9c88499540f5d1b42d6e7",
+  measurementId: "G-8XEB17SKJ4"
   };
   firebase.initializeApp(config);
 </script>
@@ -28,7 +27,7 @@
 <link href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="heading">
+  <div class="heading">
         <h1 id="first">SMART ATTENDANCE SYSTEM</h1>
     </div>
   <div class="container">
@@ -81,10 +80,11 @@
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
 
   <script>
+    
     $(function(){
-      $('.users').html('No data available');
+      $('.users').html('');  /* there was no data availabale written*/
       document.getElementById("export").onclick = function() { exportCSV() }; 
-  
+
       function exportCSV() {
       //// export CSV
         console.log("exportCSV");
@@ -106,6 +106,41 @@
         $('.buttons-csv').hide();
       }
     });
+
+    /// fake students added offline without firebase for testing 
+    /// no data avaialable script above is also hidded when connecting firebase consider that
+
+    let key=[201923453,201978653,201912793];
+    $('.users').append(`
+            <div class="live">
+              <img src="./img/checkin.png" width="150px" style="border-radius:5px;">
+              <ul>
+                <li><h3 style="color:white; font-size:30px; text-align:center; position:relative; top:20px;">UID: ${key[0]}</h3></li>
+                <li><img id="true${key[0]}" width="50px" src="./img/tick.png" style="position:relative; left:75px; top:37px;"></li>
+              </ul>
+            </div>
+            `);
+    $('.users').append(`
+            <div class="live">
+              <img src="./img/checkin.png" width="150px" style="border-radius:5px;">
+              <ul>
+                <li><h3 style="color:white; font-size:30px; text-align:center; position:relative; top:20px;">UID: ${key[1]}</h3></li>
+                <li><img id="false${key[1]}" width="50px" src="./img/cross.png" style="position:relative; left:75px; top:37px;"></li>
+              </ul>
+            </div>
+            `);
+
+    $('.users').append(`
+            <div class="live">
+              <img src="./img/checkin.png" width="150px" style="border-radius:5px;">
+              <ul>
+                <li><h3 style="color:white; font-size:30px; text-align:center; position:relative; top:20px;">UID: ${key[2]}</h3></li>
+                <li><img id="true${key[2]}" width="50px" src="./img/tick.png" style="position:relative; left:75px; top:37px;"></li>
+              </ul>
+            </div>
+            `);
+
+    // fake students end
 
     firebase.database().ref('/').on('value',function(snap){   
       if(snap.val().users){
@@ -137,7 +172,9 @@
       if(snap.val().attendence){
           button_table.clear().draw();
 
-          let arr= Object.values(snap.val().attendence);
+        let arr=[{status:1,uid:201923453,id:"galaxy",time:"19:03:23"}]
+
+     //     let arr= Object.values(snap.val().attendence);
           console.log(arr);  
           arr.forEach(function(elem,i){
               //console.log(table.row);
@@ -165,6 +202,34 @@
           })
         }
     })
+
+  /* this is fake table data i.e not from firebase server ,for testing purpose*/
+
+let arr=[{status:1,uid:201978653,id:"Moto",time:"19:11:53"},{status:1,uid:201923453,id:"galaxy-A3",time:"19:03:23"},{status:0,uid:201978653,id:"Moto",time:"19:12:13"},{status:1,uid:201912793,id:"ASUS",time:"19:35:46"}]
+console.log(arr);  
+arr.forEach(function(elem,i){
+
+    var sta;
+    var cla;
+    if(elem.status){
+          sta= "Check In";
+          cla= "sucs";
+      
+    }else{
+      sta= "Check Out";
+      cla= "fail";
+    }
+    var row= `<tr>
+        <td id="sd">${elem.uid}</td>
+        <td id="sd">${elem.id}</td>
+        <td id="sd">${elem.time}</td>
+        <td class="${cla}" id="state">${sta}</td>                
+    </tr>`;
+    button_table.rows.add($(row)).draw();
+    
+    console.log('#state'+elem.time);
+})
+/* ### fake table data end*/
 
 });
   </script>
